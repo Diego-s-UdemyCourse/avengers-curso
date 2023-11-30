@@ -1,0 +1,227 @@
+<input type="text" id="searchInput" placeholder="Buscar...">
+<ul id="searchResults">
+</ul>
+<script>
+  // Función para manejar la búsqueda
+  function performSearch() {
+    // Obtén el valor del campo de búsqueda
+    var searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    
+    // Obtén los elementos en los que deseas buscar (aquí, los elementos de lista en el markdown)
+    var listItems = document.querySelectorAll('li');
+    
+    // Limpiar resultados anteriores
+    document.getElementById('searchResults').innerHTML = '';
+
+    // Itera sobre los elementos y muestra los resultados coincidentes
+    listItems.forEach(function(item) {
+      var text = item.textContent.toLowerCase();
+      if (text.includes(searchTerm)) {
+        var resultItem = document.createElement('li');
+        resultItem.textContent = text;
+        document.getElementById('searchResults').appendChild(resultItem);
+      }
+    });
+  }
+
+  // Asocia la función de búsqueda al evento de cambio en el campo de búsqueda
+  document.getElementById('searchInput').addEventListener('input', performSearch);
+</script>
+<h1 id="comandos-de-git">Comandos de git</h1>
+<pre><code>*git init*</code></pre>
+<blockquote>
+<p>inicializa el proyecto con git</p>
+</blockquote>
+<pre><code>git checkout -- . </code></pre>
+<blockquote>
+<p>Retorna el repositorio a la ultima version cargada con commit<br />
+Solamente para los archivos que esten en el commit, los demas quedan
+igual</p>
+</blockquote>
+<pre><code>git status</code></pre>
+<blockquote>
+<p>Muestra el status de git</p>
+</blockquote>
+<pre><code>git add .     </code></pre>
+<blockquote>
+<p>Agrega todos los cambios al stash para posteriormente<br />
+hacer commit</p>
+</blockquote>
+<pre><code>git add FILENAME   </code></pre>
+<blockquote>
+<p>Agrega un solo archivo al stage</p>
+</blockquote>
+<pre><code>git branch    </code></pre>
+<blockquote>
+<p>muestra las ramas existentes</p>
+</blockquote>
+<pre><code>git branch -m master main  </code></pre>
+<blockquote>
+<p>Cambia el nombre de la rama master a main</p>
+</blockquote>
+<pre><code>git reset NOMBREDEARCHIVO </code></pre>
+<blockquote>
+<p>Saca el archivo del stash</p>
+</blockquote>
+<pre><code>.gitkeep   </code></pre>
+<blockquote>
+<p>Al crear este archivo dentro de una carpeta, el sistema de git la
+carga al<br />
+repositorio, aun si esta no contiene archivos</p>
+</blockquote>
+<pre><code>git add RUTA/*.js  </code></pre>
+<blockquote>
+<p>Esto agrega al Stash todos los archivos con extensión .js dentro
+del<br />
+directorio ruta/</p>
+</blockquote>
+<pre><code>git add css/</code></pre>
+<blockquote>
+<p>Esto agrega al stash todo el contenido de la carpeta css</p>
+</blockquote>
+<pre><code>git diff   </code></pre>
+<blockquote>
+<p>Muestra todos los archivos dentro del repositorio que se encuentran
+en estado modificado</p>
+</blockquote>
+<pre><code>git reflog </code></pre>
+<blockquote>
+<p>Historico de las referencias, movimiendos de HEAD y cambios en las
+ramas</p>
+</blockquote>
+<pre><code>git mv NOMBRE.TS NUEVONOMBRE.TS  </code></pre>
+<blockquote>
+<p>Renombra un archivo dentro del repositorio</p>
+</blockquote>
+<h2 id="trabajo-con-ramas">Trabajo con ramas</h2>
+<pre><code>git branch rama-diego     </code></pre>
+<blockquote>
+<p>Se crea una rama nueva con el nombre de RAMA-DIEGO</p>
+</blockquote>
+<pre><code>git branch   </code></pre>
+<blockquote>
+<p>Muestra las ramas que tiene el repositorio</p>
+</blockquote>
+<pre><code>git checkout rama-diego   </code></pre>
+<blockquote>
+<p>Hace el cambio a la rama de diego</p>
+</blockquote>
+<pre><code>git branch -d rama-diego-villanos  </code></pre>
+<blockquote>
+<p>Elimina la rama</p>
+</blockquote>
+<pre><code>git branch -d rama-diego-villanos  -f </code></pre>
+<blockquote>
+<p>Elimina la rama de manera forzada</p>
+</blockquote>
+<pre><code>git merge RAMAPARATRAERCAMBIOS   </code></pre>
+<blockquote>
+<p>Se llaman los cambios que tiene la rama RAMAPARATRAERCAMBIOS</p>
+</blockquote>
+<pre><code>git tag super-release </code></pre>
+<blockquote>
+<p>Agrega un tag llamado super-release</p>
+</blockquote>
+<pre><code>git show NOMBREDELTAG  </code></pre>
+<blockquote>
+<p>Muestra toda la información relacionada al tag</p>
+</blockquote>
+<pre><code>git stash </code></pre>
+<blockquote>
+<p>guarda los cambios que estoy realizando en una bobeda para despues
+retomarlos</p>
+</blockquote>
+<pre><code>git stash list   </code></pre>
+<blockquote>
+<p>lista de los stash</p>
+</blockquote>
+<pre><code>git stash pop  </code></pre>
+<blockquote>
+<p>Retoma los cambios guardados en el stash combinando con lo actual</p>
+</blockquote>
+<pre><code>git stash clear </code></pre>
+<blockquote>
+<p>limpia los stash</p>
+</blockquote>
+<pre><code>git stash drop stash@{0}</code></pre>
+<blockquote>
+<p>elimina el stash con el ID0</p>
+</blockquote>
+<pre><code>git stash apply stash@{2} </code></pre>
+<blockquote>
+<p>Restaura el Stash numero 2</p>
+</blockquote>
+<pre><code>git stash show stash@{0}   </code></pre>
+<blockquote>
+<p>Muestra los cambios de stash</p>
+</blockquote>
+<h2
+id="rebase-sirve-para-ordenar-commits-corregir-mensajes-de-commits-unir-commits-y-separar-commits"><em>Rebase
+sirve para ordenar commits, corregir mensajes de commits, unir commits y
+separar commits</em></h2>
+<pre><code>git rebase RAMADESTINO  </code></pre>
+<blockquote>
+<p>Mueve los commit a la punta de la rama especificada</p>
+</blockquote>
+<pre><code>git rebase -i HEAD~4     </code></pre>
+<blockquote>
+<p>Modo interactivo para editar los commit (En el modo interactivo
+cambiar<br />
+pick por la letra que deseamos).</p>
+</blockquote>
+<pre><code>git rebase --continue     </code></pre>
+<blockquote>
+<p>Una vez solucionados los problemas, salir del rebase</p>
+</blockquote>
+<pre><code>git checkout -- Readme.md   </code></pre>
+<blockquote>
+<p>Regresa el archivo readme a la version almacenada en el commit,
+revierte cambios</p>
+</blockquote>
+<pre><code>git remote add origin https://NAME   </code></pre>
+<blockquote>
+<p>add es crear un nuevo remoto y origin es el nombre del remoto, el
+estandar es origin</p>
+</blockquote>
+<pre><code>git remote -v    </code></pre>
+<blockquote>
+<p>muestra los nombres remotos</p>
+</blockquote>
+<pre><code>git push -u origin master     </code></pre>
+<blockquote>
+<p>origin nombre del repo, master es la rama</p>
+</blockquote>
+<pre><code>git push </code></pre>
+<blockquote>
+<p>Envia los cambios locales a un repositorio en la nube</p>
+</blockquote>
+<pre><code>git push --tags   </code></pre>
+<blockquote>
+<p>Sube al repositorio los tags que tengamos en nuestro proyecto de
+git</p>
+</blockquote>
+<pre><code>git pull/git pull origin main   </code></pre>
+<blockquote>
+<p>Trae lo ultimos cambios de la rama principal</p>
+</blockquote>
+<pre><code>git commit </code></pre>
+<blockquote>
+<p>Una vez corregidos los problemas hacer el commit y luego salir del
+rebase</p>
+</blockquote>
+<pre><code>git config --global -e  </code></pre>
+<blockquote>
+<p>Muestra la configuración global por defecto</p>
+</blockquote>
+<pre><code>git fetch </code></pre>
+<blockquote>
+<p>Es una version anterior del git pull que consiste en que trae
+la<br />
+información del servidor remoto pero no la combina con la rama
+local<br />
+en la que nos encontramos trabajando. Si quieremos combinar esos cambios
+identificados en el fectch, es necesario ejecutar otra serie de comandos
+que combinen los cambios traidos con el fetch con la rama que se este
+trabajando localmente.</p>
+</blockquote>
+<pre><code></code></pre>
